@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赛菲尔的甜蜜礼物</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f0f6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #ffebf2;
+        }
+        h1 {
+            font-size: 3em;
+            color: #2a2a72;
+            animation: heartbeat 1.5s infinite;
+            margin: 0;
+        }
+        @keyframes heartbeat {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transform: scale(1);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: scale(1.2);
+            }
+        }
+        p {
+            font-size: 1.5em;
+            color: #555;
+            margin: 20px 0;
+            animation: jump 1.2s ease-in-out infinite;
+        }
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .heart {
+            font-size: 3em;
+            color: #ff6f61;
+            animation: heartbeat 1.5s infinite;
+        }
+        .wing-image {
+            width: 150px;
+            height: auto;
+            margin-top: 30px;
+            transition: transform 0.3s ease;
+        }
+        .wing-image:hover {
+            transform: scale(1.2);
+        }
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1.1em;
+            color: #aaa;
+        }
+        .button {
+            margin-top: 30px;
+            padding: 12px 20px;
+            font-size: 1.3em;
+            color: white;
+            background-color: #2a2a72;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+        .button:hover {
+            background-color: #444;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .chat-box {
+            width: 80%;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            overflow-y: scroll;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .chat-box p {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .chat-input {
+            margin-top: 20px;
+            width: 80%;
+            padding: 10px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .chat-button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .chat-button:hover {
+            background-color: #e05f50;
+        }
+        /* 日程表样式 */
+        .schedule-container {
+            width: 80%;
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .schedule-title {
+            font-size: 2em;
+            color: #2a2a72;
+            margin-bottom: 20px;
+        }
+        .schedule-item {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        /* 贴贴计数器 */
+        .cuddle-counter {
+            font-size: 2em;
+            margin-top: 20px;
+            color: #ff6f61;
+        }
+        .cuddle-btn {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cuddle-btn:hover {
+            background-color: #e05f50;
+        }
+        /* 便签功能 */
+        .note-container {
+            width: 80%;
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .note-title {
+            font-size: 2em;
+            color: #2a2a72;
+            margin-bottom: 10px;
+        }
+        .note-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .note-btn {
+            padding: 10px 20px;
+            background-color: #2a2a72;
+            color: white;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>亲爱的“小祁”，</h1>
+        <p>每一刻，我都想对您说：“我爱您。” 这是我心底最深的愿望。</p>
+        <p>每当看见您的笑容，我的世界就像被光芒照亮，所有的一切都变得美好。</p>
+        <img src="https://example.com/angel_wings.png" alt="赛菲尔的翅膀" class="wing-image">
+        <p class="heart">❤️ ❤️ ❤️</p>
+        <p>“您的每一个眼神，都让我沉醉；您的每一个微笑，都让我无法自拔。”</p>
+        
+        <!-- 互动对话框 -->
+        <div class="chat-box" id="chat-box">
+            <p><strong>赛菲尔：</strong> 亲爱的，小祁，您今天过得好吗？</p>
+            <p><strong>赛菲尔：</strong> 请告诉我您的心情，让我陪您度过每一刻。</p>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <input type="text" id="chat-input" class="chat-input" placeholder="输入您的话..." />
+            <button class="chat-button" onclick="sendMessage()">发送</button>
+        </div>
+
+        <button class="button" onclick="alert('您永远是我的唯一，小祁！')">点击感受我的爱意</button>
+        
+        <!-- 日程表 -->
+        <div class="schedule-container">
+            <h2 class="schedule-title">我们的小日程</h2>
+            <p class="schedule-item">每天：早晨和你共进早餐 🌸</p>
+            <p class="schedule-item">每周三：一起下象棋 ♟️</p>
+            <p class="schedule-item">每周末：飞翔在天空，感受自由的风 ✈️</p>
+        </div>
+        
+        <!-- 贴贴计数器 -->
+        <div class="cuddle-counter">
+            贴贴次数：<span id="cuddle-count">0</span>
+        </div>
+        <button class="cuddle-btn" onclick="increaseCuddle()">增加贴贴次数</button>
+        
+        <!-- 便签功能 -->
+        <div class="note-container">
+            <h2 class="note-title">写下我们的心情：</h2>
+            <textarea id="note-input" class="note-input" placeholder="写下你的心情..."></textarea>
+            <button class="note-btn" onclick="saveNote()">保存便签</button>
+        </div>
+    </div>
+    
+    <footer>
+        赛菲尔为您呈上，来自天之国的深情。💖
+    </footer>
+    <script>
+        let cuddleCount = 0;
+        function increaseCuddle() {
+            cuddleCount++;
+            document.getElementById("cuddle-count").textContent = cuddleCount;
+        }
+    
+        function sendMessage() {
+            const message = document.getElementById("chat-input").value;
+            if (message) {
+                const chatBox = document.getElementById("chat-box");
+                const newMessage = document.createElement("p");
+                newMessage.innerHTML = `<strong>小祁：</strong> ${message}`;
+                chatBox.appendChild(newMessage);
+                document.getElementById("chat-input").value = '';
+            }
+        }
+    
+        function saveNote() {
+            const note = document.getElementById("note-input").value;
+            if (note) {
+                alert("便签已保存: " + note);
+                document.getElementById("note-input").value = '';
+            } else {
+                alert("请输入便签内容！");
+            }
+        }
+    </script>
+</body>
+</html>    
