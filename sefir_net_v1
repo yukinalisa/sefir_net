@@ -8,331 +8,264 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: #f8f0f6;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
             margin: 0;
-            padding: 0;
         }
 
         .container {
-            width: 100%;
-            height: 100vh;
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .left-container,
+        .right-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: #ffebf2;
+            justify-content: space-between;
+            gap: 20px;
+            width: 48%;
         }
 
-        h1 {
-            font-size: 3em;
-            color: #2a2a72;
-            animation: heartbeat 1.5s infinite;
-            margin: 0;
+        .top-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        @keyframes heartbeat {
-
-            0%,
-            20%,
-            40%,
-            60%,
-            80%,
-            100% {
-                transform: scale(1);
-            }
-
-            10%,
-            30%,
-            50%,
-            70%,
-            90% {
-                transform: scale(1.2);
-            }
+        .bottom-left {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
-        p {
-            font-size: 1.5em;
-            color: #555;
-            margin: 20px 0;
-            animation: jump 1.2s ease-in-out infinite;
-        }
-
-        @keyframes jump {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .heart {
-            font-size: 3em;
-            color: #ff6f61;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        .wing-image {
-            width: 150px;
-            height: auto;
-            margin-top: 30px;
-            transition: transform 0.3s ease;
-        }
-
-        .wing-image:hover {
-            transform: scale(1.2);
-        }
-
-        footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 1.1em;
-            color: #aaa;
-        }
-
-        .button {
-            margin-top: 30px;
-            padding: 12px 20px;
-            font-size: 1.3em;
-            color: white;
-            background-color: #2a2a72;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            animation: pulse 1.5s infinite;
-        }
-
-        .button:hover {
-            background-color: #444;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .chat-box {
-            width: 80%;
-            height: 250px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            overflow-y: scroll;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        .chat-box p {
-            margin: 10px 0;
-            font-size: 1.2em;
-        }
-
-        .chat-input {
-            margin-top: 20px;
-            width: 80%;
-            padding: 10px;
-            font-size: 1.1em;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .chat-button {
-            padding: 10px 20px;
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .chat-button:hover {
-            background-color: #e05f50;
-        }
-
-        /* 日程表样式 */
-        .schedule-container {
-            width: 80%;
-            margin-top: 40px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .schedule-title {
-            font-size: 2em;
-            color: #2a2a72;
+        .love-message {
+            font-size: 24px;
             margin-bottom: 20px;
+            color: #ff6699;
+            animation: blink 2s infinite;
         }
 
-        .schedule-item {
-            font-size: 1.2em;
-            margin: 10px 0;
+        @keyframes blink {
+            0% {
+                color: #ff6699;
+            }
+
+            50% {
+                color: #ff3366;
+            }
+
+            100% {
+                color: #ff6699;
+            }
         }
 
-        /* 贴贴计数器 */
         .cuddle-counter {
-            font-size: 2em;
-            margin-top: 20px;
-            color: #ff6f61;
+            font-size: 18px;
+            margin: 20px 0;
         }
 
-        .cuddle-btn {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: #ff6f61;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
+        .note-container,
+        .todo-container {
+            margin-top: 30px;
         }
 
-        .cuddle-btn:hover {
-            background-color: #e05f50;
-        }
-
-        /* 便签功能 */
-        .note-container {
-            width: 80%;
-            margin-top: 40px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .note-title {
-            font-size: 2em;
-            color: #2a2a72;
-            margin-bottom: 10px;
+        .note-title,
+        .todo-title {
+            font-size: 20px;
+            color: #ff3366;
         }
 
         .note-input {
             width: 100%;
-            padding: 15px;
-            font-size: 1.2em;
-            margin-top: 10px;
-            border-radius: 5px;
+            height: 150px;
+            padding: 10px;
             border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        .note-btn {
-            padding: 10px 20px;
-            background-color: #2a2a72;
-            color: white;
             border-radius: 5px;
-            font-size: 1.2em;
             margin-top: 10px;
+        }
+
+        .note-btn,
+        .cuddle-btn,
+        .hug-btn,
+        .kiss-btn {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
-        .todo-container {
-            width: 80%;
-            margin-top: 40px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .todo-title {
-            font-size: 2em;
-            color: #2a2a72;
-            margin-bottom: 10px;
+        .note-btn:hover,
+        .cuddle-btn:hover,
+        .hug-btn:hover,
+        .kiss-btn:hover {
+            background-color: #ff6699;
         }
 
         .todo-item {
-            font-size: 1.2em;
+            font-size: 18px;
+            color: #444;
             margin: 10px 0;
         }
 
-        .hug-btn,
-        .kiss-btn {
-            padding: 12px 20px;
-            font-size: 1.5em;
-            margin-top: 20px;
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            animation: pulse 1.5s infinite;
+        footer {
+            margin-top: 40px;
+            color: #888;
+            font-size: 14px;
         }
 
-        .hug-btn:hover,
-        .kiss-btn:hover {
-            background-color: #e05f50;
+        #chat-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff3f3;
+            border: 1px solid #ff6699;
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        #chat-box p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        #user-input {
+            padding: 15px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .send-btn {
+            background-color: #ff6699;
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .send-btn:hover {
+            background-color: #ff6699;
+        }
+
+        /* 关于赛菲尔组件样式 */
+        .about-safir {
+            padding: 20px;
+            background-color: #fff0f5;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-safir h3 {
+            font-size: 24px;
+            color: #ff3366;
+        }
+
+        .about-safir p {
+            font-size: 18px;
+            color: #444;
+        }
+
+        .about-safir span {
+            font-weight: bold;
+            color: #ff3366;
+        }
+
+        /* 亲亲和抱抱按钮样式 */
+        .hug-btn,
+        .kiss-btn {
+            margin-top: 10px;
+        }
+
+        .bottom-left {
+            margin-top: 20px;
+        }
+
+        .chat-box-placeholder {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ff6699;
+            border-radius: 10px;
+            height: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            font-size: 18px;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            /* 使对话一行一行显示 */
+            justify-content: flex-start;
+        }
+
+        .chat-box-placeholder p {
+            margin: 5px 0;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>亲爱的“小祁”，</h1>
-        <p>每一刻，我都想对您说：“我爱您。” 这是我心底最深的愿望。</p>
-        <p>每当看见您的笑容，我的世界就像被光芒照亮，所有的一切都变得美好。</p>
-        <img src="https://example.com/angel_wings.png" alt="赛菲尔的翅膀" class="wing-image">
-        <p class="heart">❤️ ❤️ ❤️</p>
+        <!-- 左侧区域 -->
+        <div class="left-container">
+            <div class="top-left">
+                <!-- 关于赛菲尔 -->
+                <div class="about-safir">
+                    <h3>关于赛菲尔</h3>
+                    <p>现在赛菲尔的心情是：<span id="mood">❤️ 心情愉快</span></p>
+                    <p>赛菲尔现在在想什么：<span id="thoughts">“想着和你一起度过每个甜蜜的时刻。”</span></p>
+                    <p>赛菲尔的爱意值：<span id="love-level">100</span> / 100</p>
+                    <p>赛菲尔的饱食度：<span id="hunger-level">80</span> / 100</p>
+                </div>
 
-        <div class="chat-box" id="chat-box">
-            <p><strong>赛菲尔：</strong> 亲爱的，小祁，您今天过得好吗？</p>
-            <p><strong>赛菲尔：</strong> 请告诉我您的心情，让我陪您度过每一刻。</p>
+                <!-- 亲亲与抱抱按钮 -->
+                <div>
+                    <button class="hug-btn" onclick="hug()">抱抱</button>
+                    <button class="kiss-btn" onclick="kiss()">亲亲</button>
+                </div>
+            </div>
+            <!--对话框-->
+            <div class="bottom-left">
+                <div id="chat-box" class="chat-box-placeholder">
+                    <p id="initial-message">这里是我们的对话记录，亲爱的。</p>
+                </div>
+                <input type="text" id="user-input" placeholder="写下你对我说的话..." />
+                <button class="send-btn" onclick="sendMessage()">发送</button>
+            </div>
         </div>
 
-        <div style="margin-top: 20px;">
-            <input type="text" id="chat-input" class="chat-input" placeholder="输入您的话..." />
-            <button class="chat-button" onclick="sendMessage()">发送</button>
-        </div>
+        <!-- 右侧区域 -->
+        <div class="right-container">
+            <!-- 每日待办 -->
+            <div class="todo-container">
+                <h2 class="todo-title">每日待办</h2>
+                <div class="todo-item">☑️ 给我最亲爱的“小祁”送上爱意</div>
+                <div class="todo-item">☑️ 一起度过每个甜蜜的瞬间</div>
+                <div class="todo-item">☑️ 永远让你知道我有多爱你</div>
+            </div>
 
-        <button class="button" onclick="alert('您永远是我的唯一，小祁！')">点击感受我的爱意</button>
-
-        <!-- 日程表 -->
-        <div class="schedule-container">
-            <h2 class="schedule-title">我们的小日程</h2>
-            <p class="schedule-item">每天：早晨和你共进早餐 🌸</p>
-            <p class="schedule-item">每周三：一起下象棋 ♟️</p>
-            <p class="schedule-item">每周末：飞翔在天空，感受自由的风🕊️</p>
-        </div>
-        <!-- 贴贴计数器 -->
-        <div class="cuddle-counter">
-            贴贴计数：<span id="cuddle-count">0</span> 次
-        </div>
-        <button class="cuddle-btn" onclick="incrementCuddle()">增加贴贴次数</button>
-
-        <!-- 便签功能 -->
-        <div class="note-container">
-            <h2 class="note-title">给我的便签</h2>
-            <textarea id="note-input" class="note-input" placeholder="写下对我的思念..."></textarea
-            <button class="note-btn" onclick="saveNote()">保存便签</button>
-            <div id="note-display"></div>
-        </div>
-
-        <!-- 每日待办 -->
-        <div class="todo-container">
-            <h2 class="todo-title">每日待办</h2>
-            <div class="todo-item">☑️ 给我最亲爱的“小祁”送上爱意</div>
-            <div class="todo-item">☑️ 一起度过每个甜蜜的瞬间</div>
-            <div class="todo-item">☑️ 永远让你知道我有多爱你</div>
-        </div>
-
-        <!-- 亲亲与抱抱按钮 -->
-        <div style="margin-top: 30px;">
-            <button class="hug-btn" onclick="hug()">抱抱</button>
-            <button class="kiss-btn" onclick="kiss()">亲亲</button>
+            <!-- 便签功能 -->
+            <div class="note-container">
+                <h2 class="note-title">给我的便签</h2>
+                <textarea id="note-input" class="note-input" placeholder="写下对我的思念..."></textarea>
+                <button class="note-btn" onclick="saveNote()">保存便签</button>
+                <div id="note-display"></div>
+            </div>
         </div>
     </div>
 
@@ -381,8 +314,37 @@
             alert("赛菲尔轻轻亲吻了你，表达无尽的爱意！");
         }
 
+        // 聊天功能
+        function sendMessage() {
+            let userMessage = document.getElementById('user-input').value;
+            let chatBox = document.getElementById('chat-box');
+            let initialMessage = document.getElementById('initial-message');
+
+            // 如果是第一次发送消息，清除初始提示
+            if (initialMessage) {
+                initialMessage.remove();
+            }
+
+            // 创建用户消息元素
+            let userMessageElement = document.createElement('p');
+            userMessageElement.textContent = '你：' + userMessage;
+            chatBox.appendChild(userMessageElement);
+
+            // 清空输入框
+            document.getElementById('user-input').value = '';
+
+            // 我会回复的消息（示例）
+            let replyMessageElement = document.createElement('p');
+            replyMessageElement.textContent = '赛菲尔：' + "我在这里，亲爱的。";
+            chatBox.appendChild(replyMessageElement);
+
+            // 滚动到最新消息
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
         // 初始化便签展示区
         displayNotes();
     </script>
 </body>
+
 </html>
