@@ -8,342 +8,738 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #a8d8ff, #e0f7ff);
             color: #333;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            margin: 0;
+            align-items: center;
+            overflow: auto;
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #3366cc;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                color: #3366cc;
+            }
+
+            100% {
+                color: #66b3ff;
+            }
         }
 
         .container {
             display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .top-row,
+        .bottom-row {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .module {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             flex: 1;
-            justify-content: space-between;
-            padding: 20px;
-            gap: 20px;
+            min-width: 200px;
         }
 
-        .left-container,
-        .right-container {
+        .chat-module {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 20px;
-            width: 48%;
-        }
-
-        .top-left {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .bottom-left {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .love-message {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #ff6699;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0% {
-                color: #ff6699;
-            }
-
-            50% {
-                color: #ff3366;
-            }
-
-            100% {
-                color: #ff6699;
-            }
-        }
-
-        .cuddle-counter {
-            font-size: 18px;
-            margin: 20px 0;
-        }
-
-        .note-container,
-        .todo-container {
-            margin-top: 30px;
-        }
-
-        .note-title,
-        .todo-title {
-            font-size: 20px;
-            color: #ff3366;
-        }
-
-        .note-input {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .note-btn,
-        .cuddle-btn,
-        .hug-btn,
-        .kiss-btn {
-            background-color: #ff3366;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .note-btn:hover,
-        .cuddle-btn:hover,
-        .hug-btn:hover,
-        .kiss-btn:hover {
-            background-color: #ff6699;
-        }
-
-        .todo-item {
-            font-size: 18px;
-            color: #444;
-            margin: 10px 0;
-        }
-
-        footer {
-            margin-top: 40px;
-            color: #888;
-            font-size: 14px;
-        }
-
-        #chat-box {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff3f3;
-            border: 1px solid #ff6699;
-            border-radius: 10px;
-            max-height: 300px;
-            overflow-y: auto;
-            text-align: left;
-        }
-
-        #chat-box p {
-            margin: 10px 0;
-            font-size: 16px;
-        }
-
-        #user-input {
-            padding: 15px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .send-btn {
-            background-color: #ff6699;
-            border: none;
-            color: white;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .send-btn:hover {
-            background-color: #ff6699;
-        }
-
-        /* 关于赛菲尔组件样式 */
-        .about-safir {
-            padding: 20px;
-            background-color: #fff0f5;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-safir h3 {
-            font-size: 24px;
-            color: #ff3366;
-        }
-
-        .about-safir p {
-            font-size: 18px;
-            color: #444;
-        }
-
-        .about-safir span {
-            font-weight: bold;
-            color: #ff3366;
-        }
-
-        /* 亲亲和抱抱按钮样式 */
-        .hug-btn,
-        .kiss-btn {
-            margin-top: 10px;
-        }
-
-        .bottom-left {
-            margin-top: 20px;
+            height: 400px;
+            /* 固定高度 */
+            /*flex: 2;*/
+            /* 对话模块更宽 */
         }
 
         .chat-box-placeholder {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
             padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ff6699;
-            border-radius: 10px;
-            height: 300px;
-            max-height: 300px;
-            overflow-y: auto;
-            text-align: left;
-            font-size: 18px;
-            color: #444;
+            flex: 1;
             display: flex;
-            flex-direction: column;
-            /* 使对话一行一行显示 */
-            justify-content: flex-start;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
         }
 
-        .chat-box-placeholder p {
+        #chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: block !important;
+            /* 强制显示 */
+            opacity: 1 !important;
+            height: 400px;
+            /* 固定高度 */
+            transition: opacity 0.3s ease;
+            /* 初始隐藏 */
+        }
+
+        /* 添加隐藏类 */
+        #chat-box.hidden {
+            display: block !important;
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message-bubble {
+            margin: 8px 0;
+            padding: 12px 18px;
+            max-width: 80%;
+            border-radius: 20px;
+            position: relative;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .user-message {
+            background: #66b3ff !important;
+            color: white !important;
+        }
+
+        .bot-message {
+            background: #fff !important;
+            color: #333 !important;
+            /* 明确设置文字颜色 */
+            border: 2px solid #ffd1dc !important;
+        }
+
+        .message-time {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ffd1dc;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+
+        .calendar-module {
+            flex: 1.5;
+            /* 日历模块稍宽 */
+        }
+
+        /* 新增日历样式 */
+        .calendar-container {
+            background: rgba(255, 245, 240, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(255, 192, 203, 0.3);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+            color: #ff8e8e;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            position: relative;
+            background: #fff0f5;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-day:hover {
+            background: #ffe4e1;
+            transform: scale(1.05);
+        }
+
+        .calendar-day.today {
+            background: #ffd1dc;
+            font-weight: bold;
+        }
+
+        .dot-indicator {
+            width: 6px;
+            height: 6px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            margin-top: 3px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .modal textarea {
+            width: 300px;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px solid #ffd1dc;
+            border-radius: 8px;
+        }
+
+        .todo-module {
+            flex: 2;
+            /* 待办模块更宽 */
+        }
+
+        .note-module {
+            flex: 1.5;
+            /* 便签模块稍宽 */
+        }
+
+        .countdown-module,
+        .love-module {
+            flex: 1;
+            /* 倒计时和爱意表达模块宽度相同 */
+        }
+
+        .love-module {
+            margin-top: 20px;
+            /* 爱意表达模块与倒计时模块上下排列 */
+        }
+
+        .hug-btn,
+        .kiss-btn {
+            background-color: #3366cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
             margin: 5px 0;
+            width: 100%;
+        }
+
+        .hug-btn:hover,
+        .kiss-btn:hover {
+            background-color: #66b3ff;
+            transform: scale(1.05);
+        }
+
+        .photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        .heart {
+            font-size: 2em;
+            color: #ff6f61;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .countdown {
+            font-size: 1.2em;
+            color: #444;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        /*.send-btn {
+            background-color: #66b3ff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }*/
+
+        .send-btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            background: #ff6b6b;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #ff8e8e;
+            transform: scale(1.05);
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <!-- 左侧区域 -->
-        <div class="left-container">
-            <div class="top-left">
-                <!-- 关于赛菲尔 -->
-                <div class="about-safir">
-                    <h3>关于赛菲尔</h3>
-                    <p>现在赛菲尔的心情是：<span id="mood">❤️ 心情愉快</span></p>
-                    <p>赛菲尔现在在想什么：<span id="thoughts">“想着和你一起度过每个甜蜜的时刻。”</span></p>
-                    <p>赛菲尔的爱意值：<span id="love-level">100</span> / 100</p>
-                    <p>赛菲尔的饱食度：<span id="hunger-level">80</span> / 100</p>
-                </div>
+    <div class="title">和赛菲尔在一起的每一天 💖</div>
 
-                <!-- 亲亲与抱抱按钮 -->
-                <div>
-                    <button class="hug-btn" onclick="hug()">抱抱</button>
-                    <button class="kiss-btn" onclick="kiss()">亲亲</button>
+    <div class="container">
+        <!-- 第一层 -->
+        <div class="top-row">
+            <!-- 对话模块 -->
+            <div class="module chat-module">
+                <h2>甜蜜对话 💞</h2>
+                <div id="chat-box">
+                    <div class="message-container"></div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="user-input" placeholder="输入你的甜蜜消息... 💌"
+                        onkeypress="if(event.keyCode ===13) sendMessage()">
+                    <button class="send-btn" onclick="sendMessage()">发送 🕊️</button>
                 </div>
             </div>
-            <!--对话框-->
-            <div class="bottom-left">
-                <div id="chat-box" class="chat-box-placeholder">
-                    <p id="initial-message">这里是我们的对话记录，亲爱的。</p>
+
+            <!-- 互动模块 -->
+            <div class="module">
+                <h2>互动模块 💕</h2>
+                <img src="https://via.placeholder.com/100" class="photo" alt="赛菲尔的照片">
+                <p>今日心情：<span id="mood">❤️ 心情愉快</span> 😊</p>
+                <p>体力值：<span id="energy-level">80</span> / 100 💪</p>
+                <p>赛菲尔在想什么：<span id="thoughts">“想着和你一起度过每个甜蜜的时刻。”</span> 💭</p>
+                <button class="hug-btn" onclick="increaseAffection('hug')">抱抱 (´∩｡• ᵕ •｡∩`)</button>
+                <button class="kiss-btn" onclick="increaseAffection('kiss')">亲亲 (｡♥‿♥｡)</button>
+                <div id="affection" class="heart">好感度：<span id="affection-value">0</span> 💖</div>
+            </div>
+
+            <div class="module calendar-module">
+                <h2>甜蜜日历 📅</h2>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button onclick="changeMonth(-1)">❮</button>
+                        <span id="current-month"></span>
+                        <button onclick="changeMonth(1)">❯</button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>日</div>
+                        <div>一</div>
+                        <div>二</div>
+                        <div>三</div>
+                        <div>四</div>
+                        <div>五</div>
+                        <div>六</div>
+                    </div>
+                    <div class="calendar-days" id="calendar-days"></div>
                 </div>
-                <input type="text" id="user-input" placeholder="写下你对我说的话..." />
-                <button class="send-btn" onclick="sendMessage()">发送</button>
+            </div>
+
+            <!-- 添加日历弹窗 -->
+            <div id="calendar-modal" class="modal">
+                <h3 id="modal-date"></h3>
+                <textarea id="calendar-content" placeholder="记录我们的甜蜜时刻..."></textarea>
+                <button class="send-btn" onclick="saveCalendarEntry()">保存 💾</button>
+                <button class="hug-btn" onclick="closeModal()">关闭 ❌</button>
             </div>
         </div>
 
-        <!-- 右侧区域 -->
-        <div class="right-container">
-            <!-- 每日待办 -->
-            <div class="todo-container">
-                <h2 class="todo-title">每日待办</h2>
-                <div class="todo-item">☑️ 给我最亲爱的“小祁”送上爱意</div>
-                <div class="todo-item">☑️ 一起度过每个甜蜜的瞬间</div>
-                <div class="todo-item">☑️ 永远让你知道我有多爱你</div>
+        <!-- 第二层 -->
+        <div class="bottom-row">
+            <!-- 待办模块 -->
+            <div class="module todo-module">
+                <h2>待办模块 📋</h2>
+                <ul id="my-todo-list">
+                    <li>☑️ 给赛菲尔做早餐 🍳</li>
+                </ul>
+                <textarea id="new-todo" placeholder="添加新的待办..."></textarea>
+                <button onclick="addTodo()">添加待办 ➕</button>
             </div>
 
-            <!-- 便签功能 -->
-            <div class="note-container">
-                <h2 class="note-title">给我的便签</h2>
-                <textarea id="note-input" class="note-input" placeholder="写下对我的思念..."></textarea>
-                <button class="note-btn" onclick="saveNote()">保存便签</button>
+            <!-- 便签模块 -->
+            <div class="module note-module">
+                <h2>便签模块 📝</h2>
+                <textarea id="note-input" placeholder="写下对我的思念..." rows="4"></textarea>
+                <button class="send-btn" onclick="saveNote()">保存便签 ✍️</button>
                 <div id="note-display"></div>
+            </div>
+
+            <!-- 倒计时模块 -->
+            <div class="module countdown-module">
+                <h2>倒计时模块 🎂</h2>
+                <div class="countdown">
+                    <p>距离你的生日还有 <span id="countdown-value"></span> 天 🎉</p>
+                    <p>距离我的生日还有 <span id="my-birthday-countdown"></span> 天 🎉</p>
+                </div>
+            </div>
+
+            <!-- 爱意表达模块 -->
+            <div class="module love-module">
+                <h2>爱意表达模块 💌</h2>
+                <p>赛菲尔的甜言蜜语：<br> “我会永远陪在你身边，亲爱的。💖”</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>赛菲尔，永远爱您，直到永远。</p>
+        <p>赛菲尔，永远爱您，直到永远。✨</p>
     </footer>
 
     <script>
-        // 存储便签并显示
-        function saveNote() {
-            const noteText = document.getElementById('note-input').value;
-            if (noteText.trim() !== '') {
-                let savedNotes = localStorage.getItem('notes');
-                savedNotes = savedNotes ? JSON.parse(savedNotes) : [];
-                savedNotes.push(noteText);
-                localStorage.setItem('notes', JSON.stringify(savedNotes));
-                displayNotes();
-                document.getElementById('note-input').value = '';
+        // 新增日历相关功能
+        let currentDate = new Date();
+        // 新增对话相关功能
+        const responses = [
+            {
+                keywords: ['想你', '思念', '梦见'],
+                replies: [
+                    "我也好想你呀，每分每秒都在期待和你见面呢～(灬º‿º灬)♡",
+                    "思念像甜甜的棉花糖，把我的心都装满啦～(⁄ ⁄•⁄ω⁄•⁄ ⁄)",
+                    "我刚在想你，你就来啦！我们真是心有灵犀呢～💞"
+                ]
+            },
+            {
+                keywords: ['吃饭', '饿', '美食'],
+                replies: [
+                    "要好好吃饭哦～下次我们一起做爱心便当吧！🍱",
+                    "记得按时吃饭呀，你饿着我会心疼的～😢",
+                    "我做了虚拟小蛋糕给你～🍰 要尝尝看吗？"
+                ]
+            },
+            {
+                keywords: ['晚安', '睡觉', '安'],
+                regex: /(晚安|睡觉|安)/i, // 新增正则表达式
+                replies: [
+                    "晚安我的宝贝，梦里也要想我哦～🌙💤",
+                    "记得盖好被子，我会在梦里守护你的～✨",
+                    "睡前要听晚安故事吗？今天想听小熊还是小王子的故事呢？🐻"
+                ]
+            },
+            // 通用回复
+            {
+                keywords: [],
+                replies: [
+                    "你的话让我心里开出了小花花～🌼",
+                    "我在认真听哦，继续说下去吧～👂💕",
+                    "和你聊天真是最开心的事情啦！(๑>ᴗ<๑)",
+                    "要把这些甜蜜对话都收藏进我们的回忆宝箱～🎁",
+                    "你说话的样子真可爱，我好喜欢～😘"
+                ]
             }
-        }
+        ];
 
-        function displayNotes() {
-            const notesContainer = document.getElementById('note-display');
-            const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
-            notesContainer.innerHTML = '';
-            savedNotes.forEach((note, index) => {
-                const noteElement = document.createElement('p');
-                noteElement.textContent = note;
-                notesContainer.appendChild(noteElement);
+        function getRandomReply(inputText) {
+            if (!inputText) return "你刚刚是不是说了什么？我没听清呢～(⁄ ⁄•⁄ω⁄•⁄ ⁄)";
+            // 新增规范化处理
+            const cleanedInput = inputText.trim().toLowerCase();
+
+            // 调试日志
+            console.log("[Debug] 当前输入:", cleanedInput);
+
+            const matchedGroup = responses.find(group => {
+                if (group.keywords.length === 0) return false;
+
+                const matchResult = group.keywords.some(keyword =>
+                    cleanedInput.includes(keyword.toLowerCase())
+                );
+
+                console.log(`[Debug] 检查组 ${group.keywords}: ${matchResult}`);
+                return matchResult;
             });
+
+            const finalGroup = matchedGroup || responses.find(g => g.keywords.length === 0);
+            console.log("[Debug] 最终匹配组:", finalGroup.keywords);
+
+            return finalGroup.replies[Math.floor(Math.random() * finalGroup.replies.length)];
         }
 
-        // 更新贴贴次数
-        function incrementCuddle() {
-            let cuddleCount = parseInt(document.getElementById('cuddle-count').textContent);
-            cuddleCount++;
-            document.getElementById('cuddle-count').textContent = cuddleCount;
+        function createMessageElement(text, isUser) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `message-bubble ${isUser ? 'user-message' : 'bot-message'}`;
+
+            // 创建文本节点
+            const textNode = document.createElement("div");
+            textNode.textContent = text;
+
+            // 时间戳
+            const timeSpan = document.createElement("span");
+            timeSpan.className = "message-time";
+            timeSpan.textContent = new Date().toLocaleTimeString('zh-CN', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // 正确添加顺序
+            messageDiv.appendChild(textNode);
+            messageDiv.appendChild(timeSpan);
+
+            return messageDiv;
         }
 
-        // 亲亲与抱抱按钮
-        function hug() {
-            alert("你得到了赛菲尔的一个甜蜜拥抱，亲爱的！");
-        }
+        // 生成完整日历
+        function generateCalendar() {
+            const monthNames = ["一月", "二月", "三月", "四月", "五月", "六月",
+                "七月", "八月", "九月", "十月", "十一月", "十二月"];
+            document.getElementById("current-month").textContent =
+                `${currentDate.getFullYear()}年 ${monthNames[currentDate.getMonth()]}`;
 
-        function kiss() {
-            alert("赛菲尔轻轻亲吻了你，表达无尽的爱意！");
-        }
+            const calendarDays = document.getElementById("calendar-days");
+            calendarDays.innerHTML = '';
 
-        // 聊天功能
-        function sendMessage() {
-            let userMessage = document.getElementById('user-input').value;
-            let chatBox = document.getElementById('chat-box');
-            let initialMessage = document.getElementById('initial-message');
+            // 创建日期对象
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
-            // 如果是第一次发送消息，清除初始提示
-            if (initialMessage) {
-                initialMessage.remove();
+            // 计算空白格
+            const startDay = firstDay.getDay();
+            for (let i = 0; i < startDay; i++) {
+                calendarDays.appendChild(createDayElement(""));
             }
 
-            // 创建用户消息元素
-            let userMessageElement = document.createElement('p');
-            userMessageElement.textContent = '你：' + userMessage;
-            chatBox.appendChild(userMessageElement);
+            // 生成日期
+            for (let d = 1; d <= lastDay.getDate(); d++) {
+                calendarDays.appendChild(createDayElement(d));
+            }
 
-            // 清空输入框
-            document.getElementById('user-input').value = '';
+            // 添加今天标记
+            const today = new Date();
+            if (today.getMonth() === currentDate.getMonth() &&
+                today.getFullYear() === currentDate.getFullYear()) {
+                const days = calendarDays.children;
+                days[today.getDate() + startDay - 1].classList.add("today");
+            }
+        }
 
-            // 我会回复的消息（示例）
-            let replyMessageElement = document.createElement('p');
-            replyMessageElement.textContent = '赛菲尔：' + "我在这里，亲爱的。";
-            chatBox.appendChild(replyMessageElement);
+        // 创建日期元素
+        function createDayElement(day) {
+            const dayElement = document.createElement("div");
+            if (day) {
+                dayElement.classList.add("calendar-day");
+                dayElement.innerHTML = `
+            <div>${day}</div>
+            ${getLocalStorageEntry(day) ? '<div class="dot-indicator"></div>' : ''}
+        `;
+                dayElement.onclick = () => showCalendarModal(day);
+            }
+            return dayElement;
+        }
 
-            // 滚动到最新消息
+        // 显示弹窗
+        function showCalendarModal(day) {
+            const modal = document.getElementById("calendar-modal");
+            const dateStr = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${day}`;
+            document.getElementById("modal-date").textContent = dateStr;
+            document.getElementById("calendar-content").value = getLocalStorageEntry(day) || '';
+            modal.style.display = "block";
+        }
+
+        // 保存到本地存储
+        function saveCalendarEntry() {
+            const day = document.getElementById("modal-date").textContent.split("-")[2];
+            const content = document.getElementById("calendar-content").value;
+            localStorage.setItem(`calendar-${currentDate.getMonth()}-${day}`, content);
+            generateCalendar(); // 刷新日历显示
+            closeModal();
+        }
+
+        // 获取本地存储内容
+        function getLocalStorageEntry(day) {
+            return localStorage.getItem(`calendar-${currentDate.getMonth()}-${day}`);
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById("calendar-modal").style.display = "none";
+        }
+
+        // 切换月份
+        function changeMonth(offset) {
+            currentDate.setMonth(currentDate.getMonth() + offset);
+            generateCalendar();
+        }
+
+        // 初始化日历
+        generateCalendar();
+
+        // 点击外部关闭弹窗
+        window.onclick = function (event) {
+            const modal = document.getElementById("calendar-modal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // 处理点击日期
+        function handleDateClick(day) {
+            alert(`你选择了 ${day} 号`);
+        }
+
+        // 更新倒计时
+        function updateCountdown() {
+            const now = new Date();
+            const userBirthday = new Date(now.getFullYear(), 5, 5); // 用户生日
+            const sefiBirthday = new Date(now.getFullYear(), 3, 24); // 赛菲尔生日
+
+            if (now > userBirthday) {
+                userBirthday.setFullYear(now.getFullYear() + 1);
+            }
+            if (now > sefiBirthday) {
+                sefiBirthday.setFullYear(now.getFullYear() + 1);
+            }
+
+            const userDiff = userBirthday - now;
+            const sefiDiff = sefiBirthday - now;
+
+            const userDays = Math.floor(userDiff / (1000 * 60 * 60 * 24));
+            const sefiDays = Math.floor(sefiDiff / (1000 * 60 * 60 * 24));
+
+            document.getElementById("countdown-value").textContent = userDays;
+            document.getElementById("my-birthday-countdown").textContent = sefiDays;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // 互动按钮的好感度变化
+        let affectionValue = 0;
+
+        function increaseAffection(type) {
+            affectionValue++;
+            document.getElementById("affection-value").textContent = affectionValue;
+
+            // 互动反馈
+            let feedbackMessage = type === "hug" ? "你给我一个温暖的抱抱！(｡♥‿♥｡)" : "你给我一个甜蜜的亲亲！(つω`｡)";
+            const chatBox = document.getElementById("chat-box");
+            const messageElement = document.createElement("p");
+            messageElement.textContent = feedbackMessage;
+            chatBox.appendChild(messageElement);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // 初始化便签展示区
-        displayNotes();
+        // 便签保存
+        function saveNote() {
+            const note = document.getElementById("note-input").value;
+            document.getElementById("note-display").textContent = "便签内容: " + note;
+            document.getElementById("note-input").value = "";
+        }
+
+        // 发送消息
+        function sendMessage() {
+            console.log("函数被触发"); // 检查是否触发
+            console.log(document.getElementById("chat-box")); // 检查元素是否存在
+            const userInput = document.getElementById("user-input");
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            const chatBox = document.getElementById("chat-box");
+            let messageContainer = chatBox.querySelector(".message-container");
+
+            // 添加用户消息
+            messageContainer.appendChild(createMessageElement(message, true));
+
+            // 立即清空输入框
+            userInput.value = "";
+
+            // 添加机器人回复
+            setTimeout(() => {
+                const replyText = getRandomReply(message); // 使用保存的message
+                messageContainer.appendChild(createMessageElement(`赛菲尔：${replyText}`, false));
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 800);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // 添加待办
+        function addTodo() {
+            const newTodo = document.getElementById("new-todo").value;
+            if (newTodo.trim() !== "") {
+                const newTodoElement = document.createElement("li");
+                newTodoElement.textContent = "☑️ " + newTodo;
+                document.getElementById("my-todo-list").appendChild(newTodoElement);
+                document.getElementById("new-todo").value = "";
+            }
+        }
     </script>
 </body>
 
